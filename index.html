@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeadPilot for Real Estate</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="app-header">
+        <div class="brand">
+          <div class="brand-mark">LP</div>
+          <div>
+            <p class="eyebrow">Real estate lead assistant</p>
+            <h1>LeadPilot</h1>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="resetDemo" class="ghost-button" type="button">Reset demo</button>
+          <button id="copySms" class="primary-button" type="button">Copy response</button>
+        </div>
+      </header>
+
+      <section class="hero-strip" aria-label="Lead summary">
+        <div>
+          <span id="leadScore" class="score-pill">Warm lead</span>
+          <h2>Reply to buyer leads in under a minute.</h2>
+          <p>
+            The assistant asks one simple question at a time, flags hot buyers, and knows
+            when to hand the conversation to the agent.
+          </p>
+        </div>
+        <div class="summary-metrics" aria-label="Lead qualification metrics">
+          <div>
+            <strong id="missingCount">0</strong>
+            <span>details left</span>
+          </div>
+          <div>
+            <strong id="intentLabel">90 days</strong>
+            <span>intent</span>
+          </div>
+          <div>
+            <strong id="routeLabel">SMS</strong>
+            <span>next step</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workflow-grid">
+        <section class="workspace-panel lead-panel" aria-labelledby="lead-heading">
+          <div class="panel-heading">
+            <div>
+              <p class="eyebrow">Incoming lead</p>
+              <h2 id="lead-heading">What the agent knows</h2>
+            </div>
+            <div class="source-tabs" role="group" aria-label="Lead source">
+              <button class="source-option is-active" data-source="Zillow">Zillow</button>
+              <button class="source-option" data-source="Facebook">Facebook</button>
+              <button class="source-option" data-source="Website">Website</button>
+              <button class="source-option" data-source="Open House">Open house</button>
+            </div>
+          </div>
+
+          <label class="wide-field">
+            Lead message
+            <textarea id="lastMessage" rows="4">Hi, I saw a home online and want to know what else is available near South Austin.</textarea>
+          </label>
+
+          <div class="form-grid">
+            <label>
+              Name
+              <input id="leadName" type="text" value="Jordan" />
+            </label>
+            <label>
+              Desired area
+              <input id="location" type="text" value="South Austin" />
+            </label>
+            <label>
+              Budget
+              <input id="budget" type="text" value="$550k" />
+            </label>
+            <label>
+              Property
+              <select id="propertyType">
+                <option>Single-family home</option>
+                <option>Condo</option>
+                <option>Townhome</option>
+                <option>Multi-family</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+            <label>
+              Timeline
+              <select id="timeline">
+                <option value="30">0-30 days</option>
+                <option value="60" selected>31-60 days</option>
+                <option value="90">61-90 days</option>
+                <option value="180">3-6 months</option>
+                <option value="365">6+ months</option>
+                <option value="unknown">Not sure</option>
+              </select>
+            </label>
+            <label>
+              Financing
+              <select id="financing">
+                <option>Pre-approved</option>
+                <option selected>Talking to a lender</option>
+                <option>Cash buyer</option>
+                <option>Not started</option>
+                <option>Not sure</option>
+              </select>
+            </label>
+            <label>
+              Has agent?
+              <select id="hasAgent">
+                <option>No</option>
+                <option>Yes</option>
+                <option selected>Unknown</option>
+              </select>
+            </label>
+            <label>
+              Best call time
+              <input id="callTime" type="text" value="Tomorrow afternoon" />
+            </label>
+          </div>
+        </section>
+
+        <aside class="workspace-panel response-panel" aria-labelledby="response-heading">
+          <div class="panel-heading compact">
+            <div>
+              <p class="eyebrow">Recommended reply</p>
+              <h2 id="response-heading">Next best SMS</h2>
+            </div>
+            <span id="charCount" class="char-count">0 / 320</span>
+          </div>
+
+          <div id="smsOutput" class="sms-card" aria-live="polite"></div>
+
+          <div class="mode-switcher" role="group" aria-label="Message mode">
+            <button class="mode-button is-active" data-mode="auto">Auto</button>
+            <button class="mode-button" data-mode="qualify">Qualify</button>
+            <button class="mode-button" data-mode="book">Book call</button>
+            <button class="mode-button" data-mode="handoff">Hand off</button>
+          </div>
+
+          <div class="guardrails">
+            <div>
+              <strong>Guardrails</strong>
+              <span>One question per text. No legal, mortgage, financial, or contract advice.</span>
+            </div>
+          </div>
+
+          <details class="agent-settings">
+            <summary>Agent setup</summary>
+            <div class="settings-grid">
+              <label>
+                Agent name
+                <input id="agentName" type="text" value="Maria Chen" />
+              </label>
+              <label>
+                Brokerage
+                <input id="brokerage" type="text" value="Northline Realty" />
+              </label>
+              <label>
+                Service area
+                <input id="serviceArea" type="text" value="Austin, TX" />
+              </label>
+              <label>
+                Booking link
+                <input id="bookingLink" type="url" value="https://cal.com/maria/buyer-call" />
+              </label>
+            </div>
+          </details>
+        </aside>
+      </section>
+
+      <section class="value-strip" aria-label="Sales points for agents">
+        <article>
+          <span>01</span>
+          <h3>Less typing</h3>
+          <p>Agents paste or review the lead message, then copy a ready-to-send response.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Cleaner follow-up</h3>
+          <p>The lead is qualified in a natural order without a long intake form.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Call focused</h3>
+          <p>Hot buyer intent automatically moves toward a quick appointment.</p>
+        </article>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite">Copied response</div>
+    <script src="app.js"></script>
+  </body>
+</html>
